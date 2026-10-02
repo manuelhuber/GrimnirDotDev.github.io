@@ -6,14 +6,14 @@
     <title>GrimnirDotDev</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <meta name="description"
-          content="GrimnirDotDev is an indie game studio. Wishlist Solitary Singleplayer Offline MMORPG on Steam.">
+          content="Grimnir is a solo indie game developer from Bavaria, Germany. Wishlist Solitary Singleplayer Offline MMORPG on Steam.">
 
     <!-- Link previews (Discord, social media) -->
     <meta property="og:title" content="GrimnirDotDev">
     <meta property="og:description"
-          content="Indie game studio. Wishlist Solitary Singleplayer Offline MMORPG on Steam.">
-    <meta property="og:image" content="https://www.grimnir.dev/images/SSOMMORPG.png">
-    <meta property="og:url" content="https://www.grimnir.dev/">
+          content="Solo indie game developer from Bavaria, Germany. Wishlist Solitary Singleplayer Offline MMORPG on Steam.">
+    <meta property="og:image" content="https://grimnir.dev/images/SSOMMORPG.png">
+    <meta property="og:url" content="https://grimnir.dev/">
     <meta name="twitter:card" content="summary_large_image">
 
     <style>
@@ -23,8 +23,9 @@
             --border: #ffffff14;
             --text: #e8e6e3;
             --muted: #a3a8b0;
-            --accent: #1d222e;
+            --accent: #f2c14e;
             --accent-text: #0b0d10;
+            --wishlist-bg: #1d222e;
             --header-h: 64px;
             --max-w: 1100px;
         }
@@ -146,7 +147,7 @@
             white-space: nowrap;
         }
 
-        /* Games */
+        /* Landing: banner + intro */
         .hero {
             position: relative;
             background: var(--surface);
@@ -172,7 +173,7 @@
             display: block;
             padding: 5% 7%;
             border-radius: clamp(6px, 0.8vw, 14px);
-            background: var(--accent);
+            background: var(--wishlist-bg);
             box-shadow: 0 0 14px 2px rgba(255, 255, 255, 0.25);
             transition: transform 0.15s, box-shadow 0.15s;
         }
@@ -186,11 +187,149 @@
             box-shadow: 0 0 22px 5px rgba(255, 255, 255, 0.4);
         }
 
-        /* About */
+        /* Intro */
+        .intro {
+            padding: 36px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .intro-name {
+            margin: 0;
+            font-size: clamp(4rem, 4vw, 5rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .intro-role {
+            margin: 0;
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .intro-location {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        /* Games: cover + buttons on the left, media + text on the right */
+        .game {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        /* The right column is taller, so the left one sticks while scrolling past it */
+        .game-side {
+            position: sticky;
+            top: calc(var(--header-h) + 24px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Shown at its native aspect ratio (no fixed height or cropping) */
+        .game-capsule {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .game-title {
+            margin: 4px 0 0;
+            text-wrap: balance;
+            font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            /* Gold gradient to match the game's logo */
+            background: linear-gradient(180deg, #ffe58a 0%, #f2c14e 55%, #e8902e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(242, 193, 78, 0.25));
+        }
+
+        .game-text {
+            margin: 0;
+        }
+
+        .game-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: block;
+            padding: 10px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 6px;
+            color: var(--text);
+            font-weight: 600;
+            text-decoration: none;
+            transition: border-color 0.15s, filter 0.15s;
+        }
+
+        .btn:hover, .btn:focus-visible {
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--accent-text);
+        }
+
+        .btn-primary:hover, .btn-primary:focus-visible {
+            filter: brightness(1.1);
+        }
+
+        /* Videos keep their own shape; set each one's aspect-ratio in the markup so the space is reserved before it loads */
+        .clip {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+        }
+
+        /* Mid-size screens: everything stacks, cover + buttons centered on top */
+        @media (max-width: 860px) {
+            .game {
+                grid-template-columns: 1fr;
+            }
+
+            .game-side {
+                position: static;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+        }
+
+        /* About: avatar on the right (row-reverse keeps it first in the markup, so it stays on top on phones) */
         .about {
             display: flex;
+            flex-direction: row-reverse;
             gap: 56px;
             align-items: flex-start;
+        }
+
+        .about-text {
+            flex: 1;
         }
 
         .avatar {
@@ -204,7 +343,6 @@
 
         .about-text p {
             margin: 0 0 1.1em;
-            max-width: 65ch;
         }
 
         /* Contact */
@@ -282,6 +420,14 @@
                 padding: 64px 16px;
             }
 
+            .game {
+                gap: 32px;
+            }
+
+            .game-side {
+                max-width: 260px;
+            }
+
             .about {
                 flex-direction: column;
                 align-items: center;
@@ -306,7 +452,8 @@
 
 <header>
     <div class="header-inner">
-        <a class="logo" href="#" aria-label="GrimnirDotDev"><img src="favicon.png" alt=""><span class="logo-text">GrimnirDotDev</span></a>
+        <a class="logo" href="#landing" aria-label="GrimnirDotDev"><img src="favicon.png" alt=""><span
+                class="logo-text">GrimnirDotDev</span></a>
         <nav>
             <a href="#games">Games</a>
             <a href="#about">About</a>
@@ -316,12 +463,50 @@
 </header>
 
 <main>
-    <section id="games" class="hero">
-        <h2 class="sr-only">Games</h2>
-        <img class="hero-art" src="images/SSOMMORPG.png" alt="Solitary Singleplayer Offline MMORPG artwork">
-        <div class="hero-cta">
-            <a class="wishlist" href="https://store.steampowered.com/app/4961370/" target="_blank" rel="noopener"><img
-                    src="images/SteamWishlist-trimmed.png" alt="Wishlist on Steam"></a>
+    <section id="landing">
+        <div class="hero">
+            <img class="hero-art" src="images/SSOMMORPG.png" alt="Solitary Singleplayer Offline MMORPG artwork">
+            <div class="hero-cta">
+                <a class="wishlist" href="https://store.steampowered.com/app/4961370/" target="_blank"
+                   rel="noopener"><img
+                        src="images/SteamWishlist-trimmed.png" alt="Wishlist on Steam"></a>
+            </div>
+        </div>
+
+        <div class="intro">
+            <h1 class="intro-name">Grimnir</h1>
+            <p class="intro-role">Solo Indie Game Developer</p>
+            <p class="intro-location">Located in Bavaria, Germany</p>
+        </div>
+    </section>
+
+    <section id="games" class="alt">
+        <div class="content">
+            <h2>Games</h2>
+            <div class="game">
+                <!-- Replace with the vertical game image (e.g. Steam library capsule, 600x900) -->
+                <div class="game-side">
+                    <img class="game-capsule" src="images/SSOMMORPG_vertical.png"
+                         alt="Solitary Singleplayer Offline MMORPG cover art">
+                    <div class="game-links">
+                        <a class="btn btn-primary" href="https://store.steampowered.com/app/4961370/" target="_blank"
+                           rel="noopener">Wishlist on Steam</a>
+                        <a class="btn" href="https://youtu.be/lP6OuMTbLAQ">Trailer</a>
+                        <a class="btn" href="https://impress.games/press-kit/grimnirdotdev/solitary-singleplayer-offline-mmorpg">Press kit</a>
+                        <a class="btn" href="https://bytewoid-rayfjw.subscribepage.io">Newsletter</a>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <video class="clip game-banner" style="aspect-ratio: 1254 / 362" src="videos/red_circle_2.webm"
+                           autoplay muted loop playsinline></video>
+                    <h3 class="game-title">Solitary Singleplayer Offline MMORPG</h3>
+                    <p class="game-text">Run an MMORPG guild in this incremental management game. Recruit new members,
+                        upgrade your guild, promote leaders to automate the busywork, and grind for the best gear. All
+                        to earn the Server-First achievements for every raid.</p>
+                    <video class="clip game-clip" style="aspect-ratio: 2050 / 1126" src="videos/forest_farming.webm"
+                           autoplay muted loop playsinline></video>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -358,7 +543,6 @@
                     </a>
                 </li>
                 <li>
-                    <!-- TODO: replace with your Discord invite link -->
                     <a class="contact-card" href="https://discord.gg/YZJyZAtnWn" target="_blank" rel="noopener">
                         <span class="contact-label">Discord</span>
                         <span class="contact-value">Join the server</span>
@@ -369,7 +553,7 @@
     </section>
 </main>
 
-<footer>&copy; 2026 GrimnirDotDev</footer>
+<footer>&copy; 2026 GrimnirDotDev · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></footer>
 
 </body>
 </html>
